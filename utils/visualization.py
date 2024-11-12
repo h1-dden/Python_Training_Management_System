@@ -6,8 +6,9 @@ from database.db_operations import fetch_data_from_mysql
 # Generate and display visualizations
 def show_visualizations():
     # Employee Skills Distribution
+    '''
     st.subheader("Employee Skills Distribution")
-    skills_df = fetch_data_from_mysql("Employee_Skills").merge(fetch_data_from_mysql("Skills"), on="Skill_ID")
+    skills_df = fetch_data_from_mysql("employee_skills").merge(fetch_data_from_mysql("skills"), on="Skill_ID")
     skill_counts = skills_df["Skill_Name"].value_counts()
     plt.figure(figsize=(10, 6))
     sns.barplot(x=skill_counts.index, y=skill_counts.values)
@@ -15,6 +16,7 @@ def show_visualizations():
     plt.ylabel("Number of Employees with Skill")
     plt.title("Distribution of Skills Among Employees")
     st.pyplot(plt)
+    '''
 
     # Training Scores
     st.subheader("Training Scores in Python Training")
