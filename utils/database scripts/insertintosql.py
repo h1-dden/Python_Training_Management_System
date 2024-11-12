@@ -11,7 +11,7 @@ connection = pymysql.connect(
 
 
 # Read Excel file
-df = pd.read_csv(r"C:\Users\harsh.choudhary\Desktop\python_management\teamdata.csv")
+df = pd.read_csv(r"utils\database scripts\teamdata.csv")
 
 # Insert DataFrame into MySQL table
 for index, row in df.iterrows():

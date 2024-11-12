@@ -19,8 +19,8 @@ def show_visualizations():
     # Training Scores
     st.subheader("Training Scores in Python Training")
     training_df = fetch_data_from_mysql("Python_Training")
-    avg_scores = training_df[["Test_Score", "Presentation", "Project_Assignment"]].mean()
-    avg_scores.plot(kind='bar', figsize=(8, 5), color=["#1f77b4", "#ff7f0e", "#2ca02c"])
+    avg_scores = training_df[["Test_Score", "Presentation", "Project", "Assignment"]].mean()
+    avg_scores.plot(kind='bar', figsize=(8, 5), color=["#1f77b4", "#ff7f0e", "#2ca02c", "#0000ff"])
     plt.xlabel("Training Components")
     plt.ylabel("Average Score")
     plt.title("Average Scores in Python Training")
