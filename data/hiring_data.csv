@@ -1,4 +1,4 @@
-Emp_ID,Emp_Name,Email_ID,Experience,Stack,Grade,Bench Status,Bench Duration,Deployment Status,Communication Level,Random Values
+Emp_ID,Emp_Name,Email_ID,Experience,Stack,Grade,Bench Status,Bench Duration,Deployment Status,Communication Level,Skills
 119732,Eimile Woodings,ewoodings0@zimbio.com,2,Web Dev,E3,Deployed,2,Probation,Advanced,"Fast API, Adv SQL, Flask"
 600623,Raquel Smeeth,rsmeeth1@technorati.com,1,Data,T1,Benched,1,Permanent,Beginner,"PySpark, SQL, Advanced Python, Flask, SnowFlake"
 639295,Ulrika Ropkes,uropkes2@bandcamp.com,10,Data,E1,Deployed,10,Permanent,Intermediate,"Streamlit, Advanced Python, Adv SQL, Django, Pandas"

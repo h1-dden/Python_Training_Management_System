@@ -1,0 +1,14 @@
+Skill_Id,Skill_Name
+1,Python Core
+2,Advanced Python
+3,Numpy
+4,Pandas
+5,SQL
+6,PySpark
+7,Django
+8,Flask
+9,Fast API
+10,Adv SQL
+11,DWH
+12,Streamlit
+13,SnowFlake

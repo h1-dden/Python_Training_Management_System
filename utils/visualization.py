@@ -6,8 +6,9 @@ from database.db_operations import fetch_data_from_mysql
 # Generate and display visualizations
 def show_visualizations():
     # Employee Skills Distribution
+    '''
     st.subheader("Employee Skills Distribution")
-    skills_df = fetch_data_from_mysql("Employee_Skills").merge(fetch_data_from_mysql("Skills"), on="Skill_ID")
+    skills_df = fetch_data_from_mysql("employee_skills").merge(fetch_data_from_mysql("skills"), on="Skill_ID")
     skill_counts = skills_df["Skill_Name"].value_counts()
     plt.figure(figsize=(10, 6))
     sns.barplot(x=skill_counts.index, y=skill_counts.values)
@@ -15,12 +16,14 @@ def show_visualizations():
     plt.ylabel("Number of Employees with Skill")
     plt.title("Distribution of Skills Among Employees")
     st.pyplot(plt)
+    '''
 
     # Training Scores
     st.subheader("Training Scores in Python Training")
-    training_df = fetch_data_from_mysql("Python_Training")
-    avg_scores = training_df[["Test_Score", "Presentation", "Project_Assignment"]].mean()
-    avg_scores.plot(kind='bar', figsize=(8, 5), color=["#1f77b4", "#ff7f0e", "#2ca02c"])
+    training_df = fetch_data_from_mysql("python_training")
+    avg_scores = training_df[["Test_Score", "Presentation", "Project", "Assignment"]].mean()
+    print(training_df.columns)
+    avg_scores.plot(kind='bar', figsize=(8, 5), color=["#1f77b4", "#ff7f0e", "#2ca02c", "#0000ff"])
     plt.xlabel("Training Components")
     plt.ylabel("Average Score")
     plt.title("Average Scores in Python Training")
