@@ -1,0 +1,66 @@
+#### SQL commands to create database ####
+
+-- Create the database
+CREATE DATABASE python_training_management_database;
+
+-- Use the database
+USE python_training_management_database;
+
+
+-- Create the Skills table
+CREATE TABLE Skills (
+  Skill_ID INT PRIMARY KEY,
+  Skill_Name VARCHAR(255)
+);
+
+-- Create the Employees table
+CREATE TABLE Employees (
+  Emp_ID INT PRIMARY KEY,
+  Emp_Name VARCHAR(255),
+  Email_ID VARCHAR(255),
+  Experience INT,
+  Stack VARCHAR(255),
+  Grade VARCHAR(255),
+  Bench_Status VARCHAR(255),
+  Bench_Duration INT,
+  Deployment_Status VARCHAR(255),
+  Communication_Level VARCHAR(255)
+);
+
+-- Create the Python_Training table
+CREATE TABLE Python_Training (
+  Team_ID VARCHAR(255),
+  Emp_ID INT,
+  Test_Score INT,
+  Presentation INT,
+  Project INT,
+  Assignment INT,
+  Overall_Rating INT,
+  Assessment_Date DATETIME,
+  Overall_Feedback VARCHAR(255),
+  FOREIGN KEY (Emp_ID) REFERENCES Employees(Emp_ID)
+);
+
+-- Create the Training_Schedule table
+CREATE TABLE Training_Schedule (
+  Team_ID VARCHAR(255) PRIMARY KEY,
+  start_date DATE,
+  end_date DATE,
+  Duration INT,
+  Topics_covered VARCHAR(255)
+);
+
+-- Create the Training_data table
+CREATE TABLE Training_data (
+  Team_ID VARCHAR(255) PRIMARY KEY,
+  Training_name VARCHAR(255)
+);
+
+-- Create the Employee_Skills table
+CREATE TABLE Employee_Skills (
+  Emp_ID INT,
+  Skill_ID INT,
+  FOREIGN KEY (Emp_ID) REFERENCES Employees(Emp_ID),	
+  FOREIGN KEY (Skill_ID) REFERENCES Skills(Skill_ID)
+);
+
