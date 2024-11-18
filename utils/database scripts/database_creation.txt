@@ -47,7 +47,8 @@ CREATE TABLE Training_Schedule (
   start_date DATE,
   end_date DATE,
   Duration INT,
-  Topics_covered VARCHAR(255)
+  Topics_covered VARCHAR(255),
+  Status VARCHAR(50)
 );
 
 -- Create the Training_data table
