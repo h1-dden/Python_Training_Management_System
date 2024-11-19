@@ -11,11 +11,11 @@ connection = pymysql.connect(
 
 
 # Read Excel file
-df = pd.read_csv(r"utils\database scripts\teamdata.csv")
+df = pd.read_csv(r"utils\database scripts\skill_data.csv")
 
 # Insert DataFrame into MySQL table
 for index, row in df.iterrows():
-    sql_query = "INSERT INTO Training_data VALUES (%s, %s)"
+    sql_query = "INSERT INTO Skills VALUES (%s, %s)"
     values = tuple(row)
     with connection.cursor() as cursor:
         cursor.execute(sql_query, values)

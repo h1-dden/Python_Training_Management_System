@@ -3,16 +3,7 @@ import plotly.graph_objects as go
 import pandas as pd
 import streamlit as st
 import pymysql
-
-# MySQL connection details
-DB_HOST = "localhost"
-DB_USER = "root"
-DB_PASSWORD = "root"
-DB_NAME = "python_training_management_database"
-
-def create_connection():
-    """Establish a MySQL database connection."""
-    return pymysql.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME)
+from services import database_connection
 
 def show_general_visualizations():
     """Display general employee and training statistics."""
@@ -60,8 +51,6 @@ def general_training_visualisation():
     query_training_teams = "SELECT COUNT(*) as Total_Trainings FROM training_schedule"
     query_topics_covered = "SELECT Topics_covered, COUNT(*) as Count FROM training_schedule GROUP BY Topics_covered"
 
-
-
     trainee_count_df = fetch_data(query_trainee_count)
     team_distribution_df = fetch_data(query_team_distribution)
     average_scores_df = fetch_data(query_average_scores)
@@ -90,14 +79,18 @@ def general_training_visualisation():
         st.plotly_chart(fig5, use_container_width=True)
 
 def fetch_data(query):
+
     """Helper function to fetch data from MySQL database."""
-    connection = create_connection()  
+
+    connection = database_connection.create_connection() 
     df = pd.read_sql(query, connection)
     connection.close()
     return df
 
 def visualize_filtered_employee_data(filtered_employee_df):
+    
     """Dynamically display visualizations based on filtered employee data."""
+
     st.subheader("Dynamic Visualizations for Filtered Employee Data")
 
     if filtered_employee_df.empty:
