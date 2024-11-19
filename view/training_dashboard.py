@@ -1,7 +1,7 @@
 
 import streamlit as st
 from database import db_operations
-from view import visualization
+from view import training_plots
 
 def display_training_data(connection):
     # Display Training Table with Filters
@@ -41,4 +41,4 @@ def display_training_data(connection):
             st.dataframe(filtered_training_df, use_container_width=True)
 
             # Filtered Data Visualization
-            visualization.visualize_filtered_training_data(filtered_training_df)
+            training_plots.visualize_filtered_training_data(filtered_training_df)

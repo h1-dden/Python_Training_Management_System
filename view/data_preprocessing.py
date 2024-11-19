@@ -6,7 +6,7 @@ def process_data(file, table_type):
     
     # You can add data validation or transformation here based on table_type
     if table_type == "Employees":
-        required_columns = ["Emp_ID", "Emp_Name", "Email_ID", "Experience", "Stack", "Grade", "Bench_Status", "Bench_Duration", "Deployment_Status", "Communication_Level"]
+        required_columns = ["Emp_ID", "Emp_Name", "Email_ID", "Experience", "Stack", "Grade", "Bench_Status", "Bench_Duration", "Employment_Status", "Communication_Level"]
         df = df[required_columns]
     elif table_type == "Skills":
         required_columns = ["Skill_ID", "Skill_Name"]

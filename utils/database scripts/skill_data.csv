@@ -1,14 +1,20 @@
-Skill_Id,Skill_Name
-1,Python Core
-2,Advanced Python
-3,Numpy
-4,Pandas
-5,SQL
-6,PySpark
-7,Django
-8,Flask
-9,Fast API
-10,Adv SQL
-11,DWH
-12,Streamlit
-13,SnowFlake
+Skill_Id,Skill_Name,Stack
+1,Python Core,Data
+2,Advanced,WebDev
+3,Numpy,Data
+4,Pandas,Data
+5,SQL,Data
+6,PySpark,Data
+7,Django,WebDev
+8,Flask,WebDev
+9,FastAPI,WebDev
+10,Adv_SQL,Data
+11,DWH,Data
+12,Streamlit,Data
+13,SnowFlake,Data
+14,React,WebDev
+15,Cloud,Data
+16,Github,WebDev
+17,Docker,WebDev
+18,DRF,WebDev
+

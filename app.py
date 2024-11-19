@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 from services import database_connection
-from view import (visualization,login,sidebar,
+from view import (home_plots,login,sidebar,
                   employee_dashboard,training_dashboard,
                   admin_level_client
 )
@@ -11,9 +11,12 @@ image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                           "static/images/yash_logo.png")
 
 st.set_page_config(page_title="YTMS", page_icon=image_path, 
-                   layout="wide" ,initial_sidebar_state="collapsed")
+                       layout="wide", initial_sidebar_state="collapsed", 
+                       )
+
 st.image(image=image_path, width=135)
 st.title("YTMS - Python Team")
+
 # Hide developer features
 # st.markdown(
 #     """
@@ -59,15 +62,14 @@ else:
 
     # Display content based on page selection
     if st.session_state.page == "Home":
-        #st.header("General Employee and Training Statistics")
         st.header(" ")
-        visualization.show_general_visualizations()
-        visualization.general_training_visualisation()
+        home_plots.show_general_visualizations()
+        home_plots.general_training_visualisation()
 
     elif st.session_state.page == "Employee Dashboard":
-
+        st.header("Employee Dashboard")
         employee_dashboard.display_employee_data(connection)
 
     elif st.session_state.page == "Training Dashboard":
-
+        st.header("Training Dashboard")
         training_dashboard.display_training_data(connection)
