@@ -18,7 +18,7 @@ def display_employee_data(connection):
             # Add filters for various columns
             grade_filter = st.multiselect("Grade", options=employee_df['Grade'].unique(), default=employee_df['Grade'].unique())
             comm_level_filter = st.multiselect("Communication Level", options=employee_df['Communication_Level'].unique(), default=employee_df['Communication_Level'].unique())
-            deployment_filter = st.multiselect("Deployment Status", options=employee_df['Deployment_Status'].unique(), default=employee_df['Deployment_Status'].unique())
+            deployment_filter = st.multiselect("Employee Status", options=employee_df['Deployment_Status'].unique(), default=employee_df['Deployment_Status'].unique())
             bench_status_filter = st.selectbox("Bench Status", options=['All'] + list(employee_df['Bench_Status'].unique()))
             experience_min = st.slider("Minimum Experience (Years)", min_value=int(employee_df['Experience'].min()), max_value=int(employee_df['Experience'].max()), value=int(employee_df['Experience'].min()))
             experience_max = st.slider("Maximum Experience (Years)", min_value=int(employee_df['Experience'].min()), max_value=int(employee_df['Experience'].max()), value=int(employee_df['Experience'].max()))

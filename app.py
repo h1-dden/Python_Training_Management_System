@@ -8,11 +8,11 @@ from view import (visualization,login,sidebar,
 
 # Set up Streamlit page
 image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 
-                          "images/yash_logo.png")
+                          "static/images/yash_logo.png")
 
 st.set_page_config(page_title="YTMS", page_icon=image_path, 
                    layout="wide" ,initial_sidebar_state="collapsed")
-
+st.image(image=image_path, width=135)
 st.title("YTMS - Python Team")
 # Hide developer features
 # st.markdown(
@@ -59,7 +59,8 @@ else:
 
     # Display content based on page selection
     if st.session_state.page == "Home":
-        st.header("General Employee and Training Statistics")
+        #st.header("General Employee and Training Statistics")
+        st.header(" ")
         visualization.show_general_visualizations()
         visualization.general_training_visualisation()
 
