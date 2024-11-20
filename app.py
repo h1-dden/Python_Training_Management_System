@@ -11,22 +11,11 @@ image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                           "static/images/yash_logo.png")
 
 st.set_page_config(page_title="YTMS", page_icon=image_path, 
-                       layout="wide", initial_sidebar_state="collapsed", 
+                       layout="wide", initial_sidebar_state="collapsed"
                        )
 
 st.image(image=image_path, width=135)
 st.title("YTMS - Python Team")
-
-# Hide developer features
-# st.markdown(
-#     """
-#     <style>
-#     #MainMenu {visibility: hidden;}
-#     footer {visibility: hidden;}
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
 
 # Establish database connection
 connection = database_connection.create_connection()
@@ -49,27 +38,33 @@ if not st.session_state.logged_in:
     login.user_login()
 
 else:
+    #Make sidebar
     sidebar.create_sidebar()
-    # Admin-specific file upload and download section
 
     if st.session_state.role == 'admin':
         # Ensure data folder exists
         data_path = "data"
         if not os.path.exists(data_path):
             os.makedirs(data_path)
+
         #Add admin functionality to sidebar
         admin_level_client.show_admin_client(connection,data_path)
-
+    
     # Display content based on page selection
     if st.session_state.page == "Home":
-        st.header(" ")
+        st.header(" ")  
         home_plots.show_general_visualizations()
         home_plots.general_training_visualisation()
 
     elif st.session_state.page == "Employee Dashboard":
+        st.markdown(" ")
+        st.markdown(" ")
         st.header("Employee Dashboard")
         employee_dashboard.display_employee_data(connection)
 
     elif st.session_state.page == "Training Dashboard":
+        st.markdown(" ")
+        st.markdown(" ")
         st.header("Training Dashboard")
         training_dashboard.display_training_data(connection)
+

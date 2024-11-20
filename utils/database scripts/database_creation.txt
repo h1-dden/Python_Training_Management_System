@@ -11,7 +11,7 @@ USE python_training_management_database;
 CREATE TABLE Skills (
   Skill_ID INT PRIMARY KEY,
   Skill_Name VARCHAR(255),
-  Stack VARCHAR(255),
+  Stack VARCHAR(255)
 );
 
 -- Create the Employees table

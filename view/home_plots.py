@@ -50,7 +50,7 @@ def show_general_visualizations():
         fig1.update_traces(textinfo='percent+label')
         st.plotly_chart(fig1, use_container_width=True)
 
-        fig6 = px.bar(
+        fig2 = px.bar(
             stack_count_df,
             x='Grade',
             y='Count',
@@ -59,17 +59,17 @@ def show_general_visualizations():
             color_discrete_sequence=px.colors.qualitative.Pastel1,
             text_auto=True
         )
-        fig6.update_layout(
+        fig2.update_layout(
             xaxis_title="Grade", 
             yaxis_title="Employee Count", 
             template='plotly_dark'
         )
-        st.plotly_chart(fig6, use_container_width=True)
+        st.plotly_chart(fig2, use_container_width=True)
 
     with col2:
         st.metric("Total Grades", grade_count_df['Grade'].count())
 
-        fig2 = px.histogram(
+        fig3 = px.histogram(
             grade_distribution_df,
             x='Grade',
             y='Count',
@@ -79,12 +79,12 @@ def show_general_visualizations():
             color_discrete_sequence=["red","yellowgreen"],
             text_auto=True
         )
-        fig2.update_layout(
+        fig3.update_layout(
             xaxis_title="Grade", 
             yaxis_title="Employee Count", 
             template='plotly_dark'
         )
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig3, use_container_width=True)
 
 
 def general_training_visualisation():
@@ -98,7 +98,7 @@ def general_training_visualisation():
         "SELECT Team_ID, COUNT(*) as Team_Size FROM Python_Training GROUP BY Team_ID"
     )
     query_average_scores = (
-        "SELECT Team_ID, ROUND(AVG(Test_Score), 0) as Avg_Test_Score, "
+        "SELECT Team_ID, ROUND(AVG(Test_Score), 0) as Avg_Test_Score,"
         "COUNT(*) as Team_Size FROM Python_Training GROUP BY Team_ID"
     )
     query_average_duration = (
@@ -122,7 +122,7 @@ def general_training_visualisation():
     with col3:
         st.metric("Total Trainees", trainee_count_df['Total_Trainees'].iloc[0])
 
-        fig4 = px.histogram(
+        fig4 = px.bar(
             average_scores_df,
             x='Team_ID',
             y='Avg_Test_Score',

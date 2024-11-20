@@ -1,5 +1,7 @@
+
 import streamlit as st
 import bcrypt
+
 # Define user credentials for login
 USER_CREDENTIALS = {
     'admin': {

@@ -6,6 +6,9 @@ def visualize_filtered_employee_data(filtered_employee_df):
 
     """Dynamically display visualizations based on filtered employee data."""
 
+    st.markdown(" ")
+    st.markdown(" ")
+    st.markdown(" ")
     st.subheader("Employee Report")
 
     if filtered_employee_df.empty:
