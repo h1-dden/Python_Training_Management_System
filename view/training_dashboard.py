@@ -19,12 +19,29 @@ def display_training_data(connection):
  
     with col1:
         st.markdown("### Filters")
-        team_filter = st.multiselect("Team ID", options=training_df['Team_ID'].unique(), default=training_df['Team_ID'].unique())
-        min_score = st.slider("Minimum Test Score", min_value=int(training_df['Test_Score'].min()), max_value=int(training_df['Test_Score'].max()), value=int(training_df['Test_Score'].min()))
-        max_score = st.slider("Maximum Test Score", min_value=int(training_df['Test_Score'].min()), max_value=int(training_df['Test_Score'].max()), value=int(training_df['Test_Score'].max()))
-        rating_filter = st.multiselect("Overall Rating", options=training_df['Overall_Rating'].unique(), default=training_df['Overall_Rating'].unique())
-        feedback_filter = st.multiselect("Feedback", options=training_df['Overall_Feedback'].unique(), default=training_df['Overall_Feedback'].unique())
-        
+
+        team_filter = st.multiselect("Team ID", 
+                                     options=training_df['Team_ID'].unique(), 
+                                     default=training_df['Team_ID'].unique()
+                                     )
+        min_score = st.slider("Minimum Test Score", 
+                              min_value=int(training_df['Test_Score'].min()), 
+                              max_value=int(training_df['Test_Score'].max()), 
+                              value=int(training_df['Test_Score'].min())
+                              )
+        max_score = st.slider("Maximum Test Score", 
+                              min_value=int(training_df['Test_Score'].min()), 
+                              max_value=int(training_df['Test_Score'].max()), 
+                              value=int(training_df['Test_Score'].max())
+                              )
+        rating_filter = st.multiselect("Overall Rating", 
+                                       options=training_df['Overall_Rating'].unique(), 
+                                       default=training_df['Overall_Rating'].unique()
+                                       )
+        feedback_filter = st.multiselect("Feedback", 
+                                         options=training_df['Overall_Feedback'].unique(), 
+                                         default=training_df['Overall_Feedback'].unique()
+                                         )
         # Apply filters
         filtered_training_df = training_df[
             (training_df['Team_ID'].isin(team_filter)) &
@@ -34,9 +51,9 @@ def display_training_data(connection):
             (training_df['Overall_Feedback'].isin(feedback_filter))
         ]
  
-        # Download filtered data
         st.markdown(" ")
         st.markdown(" ")
+
         st.download_button(
             label="Download Filtered Training Data",
             data=filtered_training_df.to_csv(index=False).encode('utf-8'),
@@ -45,9 +62,7 @@ def display_training_data(connection):
         )
 
         if st.session_state.role == 'admin':
-
             if st.download_button:
-
                 # Team performance data
                 team_performance_df = filtered_training_df.groupby('Team_ID')["Test_Score"].mean().reset_index()
 
@@ -64,6 +79,5 @@ def display_training_data(connection):
     
     with col2:
         st.dataframe(filtered_training_df, use_container_width=True)
- 
         # Filtered Data Visualization
         training_plots.visualize_filtered_training_data(filtered_training_df)

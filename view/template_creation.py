@@ -31,6 +31,7 @@ def download_all_templates():
     with zipfile.ZipFile(zip_buffer, "w") as zip_file:
         for template_name, template_path in templates.items():
             zip_file.write(template_path, arcname=f"{template_name}_template.csv")
+    
     zip_buffer.seek(0)
     
     #Download button
