@@ -46,8 +46,10 @@ def show_general_visualizations():
             title="Employee Status Distribution",
             hole=0.45
         )
+        fig1.update_traces(textinfo='percent+label',
+                           marker=dict(line=dict(color='#FFFFFF', width=5))
+                           )  # Add white border
         fig1.update_layout(legend=dict(x=0, y=0.5))
-        fig1.update_traces(textinfo='percent+label')
         st.plotly_chart(fig1, use_container_width=True)
 
         fig2 = px.bar(
