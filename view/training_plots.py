@@ -1,6 +1,6 @@
-import plotly.express as px
-import streamlit as st
 import pandas as pd
+import streamlit as st
+import plotly.express as px
 
 def visualize_filtered_training_data(filtered_training_df):
 
@@ -18,6 +18,7 @@ def visualize_filtered_training_data(filtered_training_df):
     # 1. Training Progress by Teams (Line Chart)
     # avg_progress_df = filtered_training_df
     # avg_progress_df['Empcount'] = filtered_training_df.groupby('Team_ID')['Emp_ID'].count()
+    
     fig1 = px.histogram(
         filtered_training_df,
         x='Team_ID',
@@ -31,10 +32,10 @@ def visualize_filtered_training_data(filtered_training_df):
     fig1.update_layout(
         xaxis_title="Team_ID",
         yaxis_title="Rating",
-        legend_title="Employee_ID",
-        template='plotly_dark'
+        legend_title="Employee_ID"
     )
     st.plotly_chart(fig1, use_container_width=True)
+    fig1.write_image("employee_ratings.png")
 
     #2. Average of all scores
     avg_progress_df = filtered_training_df.groupby('Team_ID')[['Test_Score','Presentation','Project','Assignment']].mean().reset_index()
@@ -49,11 +50,12 @@ def visualize_filtered_training_data(filtered_training_df):
     fig2.update_layout(
         xaxis_title="Team_ID",
         yaxis_title="Average_Scores",
-        legend_title="Criteria",
-        template='plotly_dark'
+        legend_title="Criteria"
     )
     st.plotly_chart(fig2, use_container_width=True)
+    fig2.write_image("test_scores.png")
 
+    communication_df = filtered_training_df.groupby('Overall_Feedback')['Emp_ID'].count().reset_index().rename(columns={'Emp_ID':'Count'})
     communication_df = filtered_training_df.groupby('Overall_Feedback')['Emp_ID'].count().reset_index().rename(columns={'Emp_ID':'Count'})
     # 3. Average Test Scores by Team (Bar Chart)
     fig3 = px.pie(
@@ -67,5 +69,6 @@ def visualize_filtered_training_data(filtered_training_df):
     fig3.update_traces(textinfo='percent+label',
                            marker=dict(line=dict(color='#FFFFFF', width=5))
                            )  # Add white border
-    fig3.update_layout(legend=dict(x=0, y=0.5))
+    #fig3.update_layout(legend=dict(x=0, y=0.5))
     st.plotly_chart(fig3, use_container_width=True)
+    fig3.write_image("feedback_of_trainees.png")

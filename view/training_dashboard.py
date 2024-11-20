@@ -3,7 +3,6 @@ import streamlit as st
 from database import db_operations
 from view import training_plots, generate_tpr
 
- 
 def display_training_data(connection):
     
     """ Display training data from the database"""
@@ -67,7 +66,7 @@ def display_training_data(connection):
                 team_performance_df = filtered_training_df.groupby('Team_ID')["Test_Score"].mean().reset_index()
 
                 # Generate PDF report
-                pdf_buffer = generate_tpr.generate_training_pdf(schedule_df, team_performance_df)
+                pdf_buffer = generate_tpr.generate_pdf_with_visualizations(schedule_df, training_df)
 
                 # Provide download button for the PDF
                 st.download_button(
@@ -76,7 +75,7 @@ def display_training_data(connection):
                     file_name="Training_Progress_Report.pdf",
                     mime="application/pdf"
                 )
-    
+
     with col2:
         st.dataframe(filtered_training_df, use_container_width=True)
         # Filtered Data Visualization
