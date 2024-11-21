@@ -51,8 +51,9 @@ def display_employee_data(connection):
                                       options=employee_df['Stack'].unique(), 
                                       default=employee_df['Stack'].unique()
                                       )
-        skill_filter = st.multiselect("Skills", 
-                                      options=employee_df['Skill_Level'].unique(), 
+        
+        skill_filter = st.multiselect("Skills",
+                                      options=employee_df['Skill_Level'].unique(),
                                       default=employee_df['Skill_Level'].unique()
                                       )
         
@@ -66,7 +67,10 @@ def display_employee_data(connection):
             (employee_df['Experience'] <= experience_max) &
             (employee_df['Stack'].isin(stack_filter)) &
             (employee_df['Skill_Level'].isin(skill_filter))
+            (employee_df['Stack'].isin(stack_filter)) &
+            (employee_df['Skill_Level'].isin(skill_filter))
         ]
+        
         
         # Download button for filtered data
         st.markdown(" ")
@@ -77,6 +81,13 @@ def display_employee_data(connection):
             file_name="filtered_employee_data.csv",
             mime="text/csv"
         )
+    # Display filtered table in the second column
+    with col2:
+        st.dataframe(filtered_employee_df, use_container_width=True)
+        # Filtered Data Visualization
+        st.markdown(" ")
+        employee_plots.visualize_filtered_employee_data(filtered_employee_df)
+
     # Display filtered table in the second column
     with col2:
         st.dataframe(filtered_employee_df, use_container_width=True)

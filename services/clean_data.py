@@ -1,5 +1,7 @@
 import pandas as pd
 from services import get_data
+from database import db_operations
+
 
 def clean_data():
 
@@ -25,7 +27,8 @@ def clean_data():
 
     #cleaning of python_training dataframe
     clean_python_training= python_training
-    for column in clean_python_training.columns[1:7]:   
+    clean_python_training['Emp_ID'] = clean_python_training['Emp_ID'].astype(int)
+    for column in clean_python_training.columns[3:8]:   
         clean_python_training[f'{column}'] = clean_python_training[f'{column}'].astype(int)
     clean_python_training['Assessment_Date'] = pd.to_datetime(clean_python_training['Assessment_Date'])
 
@@ -37,3 +40,27 @@ def clean_data():
  
  
     return clean_employees, clean_employee_skill_exploded, clean_python_training, clean_training_schedule
+
+def create_test_scores_dataframe(connection):
+
+    """Fetch data and create a DataFrame with test scores for each unique employee."""
+
+    # Fetch data from the database
+    training_data_df = db_operations.fetch_training_data(connection)
+
+    # Pivot the DataFrame
+
+    test_scores_df = training_data_df.pivot_table(
+        index=['Team_ID', 'Emp_Name','Email_ID'],  # Rows are based on team_ID and emp_ID
+        columns='Test_Name',         # Each unique test name becomes a column
+        values='Test_Score',         # Values are from test_score
+        aggfunc='first'              # Handle duplicate combinations (if any)
+    ).reset_index()
+    test_scores_df.index = range(1, len(test_scores_df) + 1)
+
+    #create avg test scores
+    test_scores_df['Avg_Score'] = test_scores_df.iloc[:, 3:].mean(axis=1)
+
+    #Fill NaN values (if any) with 0
+    #test_scores_df = test_scores_df.fillna(0)
+    return test_scores_df

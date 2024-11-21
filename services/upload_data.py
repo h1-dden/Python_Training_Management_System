@@ -98,12 +98,12 @@ def data_upload(connection):
  
     def upload_python_training():
         # Collect Emp_ID and Assessment_Date pairs from the DataFrame
-        emp_assessment_pairs = list(zip(python_training.iloc[:, 1], python_training.iloc[:, -2]))
+        emp_assessment_pairs = list(zip(python_training.iloc[:, 1], python_training.iloc[:, 2], python_training.iloc[:, -2]))
  
         # Check if any of the Emp_ID and Assessment_Date pairs already exists in the database
         check_query = """
-            SELECT Emp_ID, Assessment_Date FROM Python_Training
-            WHERE (Emp_ID, Assessment_Date) IN %s
+            SELECT Emp_ID, Test_Name, Assessment_Date FROM Python_Training
+            WHERE (Emp_ID, Test_Name, Assessment_Date) IN %s
         """
         with connection.cursor() as cursor:
             cursor.execute(check_query, (tuple(emp_assessment_pairs),))
@@ -111,14 +111,14 @@ def data_upload(connection):
  
         # Determine if there are any new pairs
         new_rows = python_training[
-            ~python_training.apply(lambda row: (row[1], row[-2]) in existing_pairs, axis=1)
+            ~python_training.apply(lambda row: (row[1], row[2], row[-2]) in existing_pairs, axis=1)
         ]
  
         if new_rows.empty:
-            print("Data already exists for all Emp_ID and Assessment_Date combinations in the DataFrame.")
+            print("Data already exists for all Emp_ID, Test_Name and Assessment_Date combinations in the DataFrame.")
         else:
             # Insert new rows into the database
-            sql_query = "INSERT INTO Python_Training VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            sql_query = "INSERT INTO Python_Training VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
             with connection.cursor() as cursor:
                 for index, row in new_rows.iterrows():
                     values = tuple(row)
