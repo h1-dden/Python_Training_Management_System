@@ -60,10 +60,21 @@ def display_training_data(connection):
             mime="text/csv"
         )
 
+    with col2:
+        st.dataframe(filtered_training_df, use_container_width=True)
+        # Filtered Data Visualization
+        training_plots.visualize_filtered_training_data(filtered_training_df)
+
+    with col1:
+        st.download_button(
+                    label="Download TPR",
+                    data=pdf_buffer,
+                    file_name="Training_Progress_Report.pdf",
+                    mime="application/pdf"
+                )
+
         if st.session_state.role == 'admin':
             if st.download_button:
-                # Team performance data
-                team_performance_df = filtered_training_df.groupby('Team_ID')["Test_Score"].mean().reset_index()
 
                 # Generate PDF report
                 pdf_buffer = generate_tpr.generate_pdf_with_visualizations(schedule_df, training_df)
@@ -75,8 +86,3 @@ def display_training_data(connection):
                     file_name="Training_Progress_Report.pdf",
                     mime="application/pdf"
                 )
-
-    with col2:
-        st.dataframe(filtered_training_df, use_container_width=True)
-        # Filtered Data Visualization
-        training_plots.visualize_filtered_training_data(filtered_training_df)

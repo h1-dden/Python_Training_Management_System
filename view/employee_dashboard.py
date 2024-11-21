@@ -51,6 +51,11 @@ def display_employee_data(connection):
                                       options=employee_df['Stack'].unique(), 
                                       default=employee_df['Stack'].unique()
                                       )
+        skill_filter = st.multiselect("Skills", 
+                                      options=employee_df['Skill_Level'].unique(), 
+                                      default=employee_df['Skill_Level'].unique()
+                                      )
+        
         # Apply filters to the DataFrame
         filtered_employee_df = employee_df[
             (employee_df['Grade'].isin(grade_filter)) &
@@ -59,8 +64,10 @@ def display_employee_data(connection):
             ((employee_df['Bench_Status'] == bench_status_filter) if bench_status_filter != 'All' else True) &
             (employee_df['Experience'] >= experience_min) &
             (employee_df['Experience'] <= experience_max) &
-            (employee_df['Stack'].isin(stack_filter))
+            (employee_df['Stack'].isin(stack_filter)) &
+            (employee_df['Skill_Level'].isin(skill_filter))
         ]
+        
         # Download button for filtered data
         st.markdown(" ")
         st.markdown(" ")

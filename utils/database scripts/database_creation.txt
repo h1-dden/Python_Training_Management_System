@@ -33,6 +33,7 @@ CREATE TABLE Employees (
 CREATE TABLE Python_Training (
   Team_ID VARCHAR(255),
   Emp_ID INT,
+  Test_Name VARCHAR(255),
   Test_Score INT,
   Presentation INT,
   Project INT,
