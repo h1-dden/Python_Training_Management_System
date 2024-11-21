@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def process_data(file, table_type):
 
     """ Process data from a CSV file based on the table type"""
