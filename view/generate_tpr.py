@@ -3,9 +3,12 @@ from reportlab.lib import colors
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image, Spacer, Paragraph
+from reportlab.platypus import (SimpleDocTemplate, Table, Spacer, 
+                                TableStyle, Image, PageBreak, 
+                                Paragraph
+                            )
 
-def generate_pdf_with_visualizations(schedule_df, training_data_df):
+def generate_pdf_with_visualizations(schedule_df, training_data_df, test_score_df):
 
     """Generate a professional PDF with dynamic visualizations."""
     
@@ -26,6 +29,22 @@ def generate_pdf_with_visualizations(schedule_df, training_data_df):
     elements.append(title)
     elements.append(Spacer(1, 20))
 
+    # Prepare Team Members Data Table
+    training_data_df = training_data_df.drop(columns=['Assessment_Date','Test_Score', 'Assignment', 'Email_ID'])  # Drop the 'Assessment Date' column if it exists
+    elements.append(Paragraph("Team Members Data", styles['Heading2']))
+    training_data = [training_data_df.columns.tolist()] + training_data_df.values.tolist()
+    training_table = Table(training_data)
+    training_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),  # Light blue header
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+    ]))
+    elements.append(training_table)
+    elements.append(PageBreak())
+
     # Add Training Schedule Table
     elements.append(Paragraph("Training Schedule", styles['Heading2']))
     schedule_data = [schedule_df.columns.tolist()] + schedule_df.values.tolist()
@@ -39,23 +58,23 @@ def generate_pdf_with_visualizations(schedule_df, training_data_df):
         ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
     ]))
     elements.append(schedule_table)
-    elements.append(Spacer(1, 20))
+    elements.append(PageBreak())
 
-    # Prepare Team Members Data Table (drop 'Assessment Date' column)
-    training_data_df = training_data_df.drop(columns=['Assessment_Date'])  # Drop the 'Assessment Date' column if it exists
-    elements.append(Paragraph("Team Members Data", styles['Heading2']))
-    training_data = [training_data_df.columns.tolist()] + training_data_df.values.tolist()
-    training_table = Table(training_data)
-    training_table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),  # Light blue header
+    #Prepare Test Score by Team
+    test_score_df = test_score_df.drop(columns=['Email_ID']) 
+    elements.append(Paragraph("Test Scores", styles['Heading2']))
+    test_score_data = [test_score_df.columns.tolist()] + test_score_df.values.tolist()
+    test_score_table = Table(test_score_data)
+    test_score_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
         ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
     ]))
-    elements.append(training_table)
-    elements.append(Spacer(1, 20))
+    elements.append(test_score_table)
+    elements.append(PageBreak())
 
     # Add visualizations
     elements.append(Image("employee_ratings.png", width=400, height=300))
