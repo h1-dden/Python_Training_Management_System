@@ -1,4 +1,5 @@
 import io
+import pandas as pd
 from reportlab.lib import colors
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
@@ -13,7 +14,13 @@ def generate_pdf_with_visualizations(schedule_df, training_data_df, test_score_d
     """Generate a professional PDF with dynamic visualizations."""
     
     buffer = io.BytesIO()
-    pdf = SimpleDocTemplate(buffer, pagesize=letter, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=72)
+    pdf = SimpleDocTemplate(buffer, 
+                            pagesize=letter, 
+                            rightMargin=72, 
+                            leftMargin=72, 
+                            topMargin=72, 
+                            bottomMargin=72
+                            )
     elements = []
 
     # Add logo
@@ -61,7 +68,8 @@ def generate_pdf_with_visualizations(schedule_df, training_data_df, test_score_d
     elements.append(PageBreak())
 
     #Prepare Test Score by Team
-    test_score_df = test_score_df.drop(columns=['Email_ID']) 
+    #ISSUE IS HERE 
+    test_score_df.drop(test_score_df.columns.difference(['Emp_ID','Emp_Name','Team_ID','Avg_Score'], 1), inplace=True)
     elements.append(Paragraph("Test Scores", styles['Heading2']))
     test_score_data = [test_score_df.columns.tolist()] + test_score_df.values.tolist()
     test_score_table = Table(test_score_data)
@@ -77,13 +85,13 @@ def generate_pdf_with_visualizations(schedule_df, training_data_df, test_score_d
     elements.append(PageBreak())
 
     # Add visualizations
-    elements.append(Image("employee_ratings.png", width=400, height=300))
+    elements.append(Image(r"static\visualizations\employee_ratings.png", width=400, height=300))
     elements.append(Spacer(1, 20))
 
-    elements.append(Image("test_scores.png", width=400, height=300))
+    elements.append(Image(r"static\visualizations\avg_scores.png", width=400, height=300))
     elements.append(Spacer(1, 40))
 
-    elements.append(Image("feedback_of_trainees.png", width=500, height=300))
+    elements.append(Image(r"static\visualizations\feedback_of_trainees.png", width=500, height=300))
     elements.append(Spacer(1, 40))
 
     # Build PDF

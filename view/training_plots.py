@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-def visualize_filtered_training_data(filtered_training_df):
+def visualize_filtered_training_data(filtered_training_df,filtered_test_scores):
 
     """Dynamically display visualizations based on filtered training data."""
     
@@ -16,9 +16,6 @@ def visualize_filtered_training_data(filtered_training_df):
         return
 
     # 1. Training Progress by Teams (Line Chart)
-    # avg_progress_df = filtered_training_df
-    # avg_progress_df['Empcount'] = filtered_training_df.groupby('Team_ID')['Emp_ID'].count()
-    
     fig1 = px.histogram(
         filtered_training_df,
         x='Team_ID',
@@ -35,7 +32,7 @@ def visualize_filtered_training_data(filtered_training_df):
         legend_title="Employee_ID"
     )
     st.plotly_chart(fig1, use_container_width=True)
-    fig1.write_image("employee_ratings.png")
+    fig1.write_image(r"static\visualizations\employee_ratings.png")
 
     #2. Average of all scores
     avg_progress_df = filtered_training_df.groupby('Team_ID')[['Test_Score','Presentation','Project','Assignment']].mean().reset_index()
@@ -53,11 +50,10 @@ def visualize_filtered_training_data(filtered_training_df):
         legend_title="Criteria"
     )
     st.plotly_chart(fig2, use_container_width=True)
-    fig2.write_image("test_scores.png")
+    fig2.write_image(r"static\visualizations\avg_scores.png")
 
-    communication_df = filtered_training_df.groupby('Overall_Feedback')['Emp_ID'].count().reset_index().rename(columns={'Emp_ID':'Count'})
-    communication_df = filtered_training_df.groupby('Overall_Feedback')['Emp_ID'].count().reset_index().rename(columns={'Emp_ID':'Count'})
     # 3. Average Test Scores by Team (Bar Chart)
+    communication_df = filtered_training_df.groupby('Overall_Feedback')['Emp_ID'].count().reset_index().rename(columns={'Emp_ID':'Count'})
     fig3 = px.pie(
         communication_df,
         values='Count',
@@ -69,6 +65,22 @@ def visualize_filtered_training_data(filtered_training_df):
     fig3.update_traces(textinfo='percent+label',
                            marker=dict(line=dict(color='#FFFFFF', width=5))
                            )  # Add white border
-    #fig3.update_layout(legend=dict(x=0, y=0.5))
     st.plotly_chart(fig3, use_container_width=True)
-    fig3.write_image("feedback_of_trainees.png")
+    fig3.write_image(r"static\visualizations\feedback_of_trainees.png")
+
+    #4. Test Scores Average by module
+    # fig4 = px.histogram(
+    #     avg_progress_df,
+    #     x='Team_ID',
+    #     y=['Test_Score','Presentation','Project','Assignment'],
+    #     title="Test Scores by Team",
+    #     barmode="group",
+    #     color_discrete_sequence=px.colors.qualitative.Pastel
+    # )
+    # fig4.update_layout(
+    #     xaxis_title="Team_ID",
+    #     yaxis_title="Average_Scores",
+    #     legend_title="Criteria"
+    # )
+    # st.plotly_chart(fig4, use_container_width=True)
+    # fig4.write_image(r"static\visualizations\test_scores.png")

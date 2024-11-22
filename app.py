@@ -17,9 +17,6 @@ st.set_page_config(page_title="YTMS", page_icon=image_path,
 st.image(image=image_path, width=135)
 st.title("YTMS - Python Team")
 
-# Establish database connection
-connection = database_connection.create_connection()
-
 # Initialize session state for login, role, and page
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
@@ -48,7 +45,7 @@ else:
             os.makedirs(data_path)
 
         #Add admin functionality to sidebar
-        admin_level_client.show_admin_client(connection,data_path)
+        admin_level_client.show_admin_client(data_path)
     
     # Display content based on page selection
     if st.session_state.page == "Home":
@@ -60,11 +57,11 @@ else:
         st.markdown(" ")
         st.markdown(" ")
         st.header("Employee Dashboard")
-        employee_dashboard.display_employee_data(connection)
+        employee_dashboard.display_employee_data()
 
     elif st.session_state.page == "Training Dashboard":
         st.markdown(" ")
         st.markdown(" ")
         st.header("Training Dashboard")
-        training_dashboard.display_training_data(connection)
+        training_dashboard.display_training_data()
 

@@ -2,15 +2,15 @@ import streamlit as st
 from database import db_operations
 from view import employee_plots
 
-def display_employee_data(connection):
+def display_employee_data():
 
     """ Display employee data in the Streamlit app"""
 
     st.markdown(" ")
 
     # Fetch data from the database for employees
-    employee_df = db_operations.fetch_employee_data(connection)
-    training_schedule_df = db_operations.fetch_training_schedule_data(connection)
+    employee_df = db_operations.fetch_employee_data()
+    training_schedule_df = db_operations.fetch_training_schedule_data()
     
     # Set up the layout with two columns: filters on the left, table on the right
     col1, col2 = st.columns([1, 3])  # Make the filter column narrower than the table column
@@ -66,11 +66,10 @@ def display_employee_data(connection):
             (employee_df['Experience'] >= experience_min) &
             (employee_df['Experience'] <= experience_max) &
             (employee_df['Stack'].isin(stack_filter)) &
-            (employee_df['Skill_Level'].isin(skill_filter))
+            (employee_df['Skill_Level'].isin(skill_filter)) &
             (employee_df['Stack'].isin(stack_filter)) &
             (employee_df['Skill_Level'].isin(skill_filter))
         ]
-        
         
         # Download button for filtered data
         st.markdown(" ")
@@ -81,12 +80,6 @@ def display_employee_data(connection):
             file_name="filtered_employee_data.csv",
             mime="text/csv"
         )
-    # Display filtered table in the second column
-    with col2:
-        st.dataframe(filtered_employee_df, use_container_width=True)
-        # Filtered Data Visualization
-        st.markdown(" ")
-        employee_plots.visualize_filtered_employee_data(filtered_employee_df)
 
     # Display filtered table in the second column
     with col2:

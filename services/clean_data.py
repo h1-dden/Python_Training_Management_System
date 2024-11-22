@@ -41,12 +41,12 @@ def clean_data():
  
     return clean_employees, clean_employee_skill_exploded, clean_python_training, clean_training_schedule
 
-def create_test_scores_dataframe(connection):
+def create_test_scores_dataframe():
 
     """Fetch data and create a DataFrame with test scores for each unique employee."""
 
     # Fetch data from the database
-    training_data_df = db_operations.fetch_training_data(connection)
+    training_data_df = db_operations.fetch_training_data()
 
     # Pivot the DataFrame
 

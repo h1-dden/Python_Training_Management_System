@@ -6,7 +6,7 @@ from database import db_operations
 from utils import save_file
 from services import upload_data
 
-def show_admin_client(connection,data_path):
+def show_admin_client(data_path):
 
     """ Show admin client page with template creation and file upload functionality"""
 
@@ -53,7 +53,7 @@ def show_admin_client(connection,data_path):
     # Save data to database
     if st.sidebar.button("Save Data"):
         try:
-            upload_data.data_upload(connection)
+            upload_data.data_upload()
             st.sidebar.success("Data saved successfully!")
         except Exception as e:
             st.sidebar.error(f"Error occurred during data saving: {e}")
