@@ -95,29 +95,25 @@ def general_training_visualisation():
     st.markdown(" ")
     st.markdown("### Training Statistics Overview")
 
-    query_trainee_count = "SELECT COUNT(*) as Total_Trainees FROM python_training"
-    query_team_distribution = (
-        "SELECT Team_ID, COUNT(*) as Team_Size FROM Python_Training GROUP BY Team_ID"
-    )
+    query_trainee_count = "SELECT COUNT(DISTINCT Emp_ID) as Total_Trainees FROM python_training"
     query_average_scores = (
         "SELECT Team_ID, ROUND(AVG(Test_Score), 0) as Avg_Test_Score,"
-        "COUNT(*) as Team_Size FROM Python_Training GROUP BY Team_ID"
+        "COUNT(DISTINCT Team_ID,Emp_ID) as Team_Size FROM Python_Training GROUP BY Team_ID"
     )
     query_average_duration = (
         "SELECT Team_ID, AVG(Duration) as Avg_Duration, Status FROM training_schedule "
         "GROUP BY Team_ID"
     )
     query_training_teams = "SELECT COUNT(*) as Total_Trainings FROM training_schedule"
-    query_topics_covered = (
-        "SELECT Topics_covered, COUNT(*) as Count FROM training_schedule GROUP BY Topics_covered"
-    )
+    # query_topics_covered = (
+    #     "SELECT Topics_covered, COUNT(*) as Count FROM training_schedule GROUP BY Topics_covered"
+    # )
 
     trainee_count_df = retrieve_data.fetch_data(query_trainee_count)
-    team_distribution_df = retrieve_data.fetch_data(query_team_distribution)
     average_scores_df = retrieve_data.fetch_data(query_average_scores)
     average_duration_df = retrieve_data.fetch_data(query_average_duration)
     training_teams_df = retrieve_data.fetch_data(query_training_teams)
-    topics_covered_df = retrieve_data.fetch_data(query_topics_covered)
+    #topics_covered_df = retrieve_data.fetch_data(query_topics_covered)
 
     col3, col4 = st.columns(2)
 
@@ -136,6 +132,7 @@ def general_training_visualisation():
         fig4.update_layout(
             xaxis_title="Team ID",
             yaxis_title="Average Test Score",
+             margin=dict(r=30),
             template='plotly_dark'
         )
         st.plotly_chart(fig4, use_container_width=True)
@@ -152,8 +149,8 @@ def general_training_visualisation():
             color_discrete_sequence=px.colors.qualitative.Pastel2
         )
         fig5.update_layout(
-            xaxis_title="Team ID",
-            yaxis_title="Average Training Duration",
+            xaxis_title="Average Training Duration",
+            yaxis_title=" ",
             template='plotly_dark'
         )
         st.plotly_chart(fig5, use_container_width=True)

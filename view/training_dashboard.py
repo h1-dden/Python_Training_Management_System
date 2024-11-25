@@ -73,7 +73,12 @@ def display_training_data():
         )
 
     with col2:
+        st.markdown(" ")
+        st.markdown("Trainee Performance Data")
         st.dataframe(filtered_training_df, use_container_width=True)
+
+        st.subheader(" ")
+        st.markdown("Test Scores of Trainees")
         st.dataframe(filtered_testscore_df,use_container_width=True)
         # Filtered Data Visualization
         training_plots.visualize_filtered_training_data(filtered_training_df,filtered_testscore_df)

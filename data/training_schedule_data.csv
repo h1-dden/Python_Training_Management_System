@@ -1,4 +1,5 @@
 Team_ID,Start_Date,End_Data,Duration,Topics_to_be_covered,Status
-T01,01-01-2024 00:00,29-02-2024 00:00,59,"SnowFlake, Pandas, Numpy",Completed
-T02,12-06-2024 00:00,09-09-2024 00:00,89,"Adv SQL, Python Core, Django",Completed
-"T03	",01-11-2024 00:00,15-01-2025 00:00,62,"Adv SQL, Advanced Python, DWH",In Progess
+D1,1/1/2024,29/02/2024,59,"SnowFlake, Pandas, Numpy",Completed
+W1,6/12/2024,9/9/2024,89,"Adv SQL, Python Core, Django",Completed
+WD1,11/1/2024,15/01/2025,62,"Adv SQL, Advanced Python, DWH",In Progess
+New Training,23/11/2024,15/01/2025,62,Hadoop,In Progess

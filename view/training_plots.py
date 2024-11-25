@@ -69,18 +69,24 @@ def visualize_filtered_training_data(filtered_training_df,filtered_test_scores):
     fig3.write_image(r"static\visualizations\feedback_of_trainees.png")
 
     #4. Test Scores Average by module
-    # fig4 = px.histogram(
-    #     avg_progress_df,
-    #     x='Team_ID',
-    #     y=['Test_Score','Presentation','Project','Assignment'],
-    #     title="Test Scores by Team",
-    #     barmode="group",
-    #     color_discrete_sequence=px.colors.qualitative.Pastel
-    # )
-    # fig4.update_layout(
-    #     xaxis_title="Team_ID",
-    #     yaxis_title="Average_Scores",
-    #     legend_title="Criteria"
-    # )
-    # st.plotly_chart(fig4, use_container_width=True)
-    # fig4.write_image(r"static\visualizations\test_scores.png")
+    module_df = filtered_test_scores.drop(columns=['Team_ID','Emp_Name','Email_ID','Avg_Score'])
+    module_df = module_df.transpose()
+    mean_scores = module_df.mean(axis=1).round().reset_index()
+    mean_scores.columns = ['Test_Name', 'Average_Score']  # Rename columns for clarity
+    merged_scores = module_df.merge(mean_scores, on='Test_Name', how='left')
+    
+    fig4 = px.bar(
+        merged_scores,
+        x='Test_Name',
+        y='Average_Score',
+        title="Average Test Scores by Module",
+        color='Test_Name',
+        color_discrete_sequence=px.colors.sequential.Blues_r
+    )
+    fig4.update_layout(
+        xaxis_title="Test Name",
+        yaxis_title="Average Scores",
+        legend_title="Test Name"
+    )
+    st.plotly_chart(fig4, use_container_width=True)
+    fig4.write_image(r"static\visualizations\avg_test_scores_by_module.png")

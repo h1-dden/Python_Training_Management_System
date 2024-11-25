@@ -37,7 +37,7 @@ def generate_pdf_with_visualizations(schedule_df, training_data_df, test_score_d
     elements.append(Spacer(1, 20))
 
     # Prepare Team Members Data Table
-    training_data_df = training_data_df.drop(columns=['Assessment_Date','Test_Score', 'Assignment', 'Email_ID'])  # Drop the 'Assessment Date' column if it exists
+    training_data_df.drop(columns=['Assessment_Date','Email_ID'],inplace=True)  # Drop the 'Assessment Date' column if it exists
     elements.append(Paragraph("Team Members Data", styles['Heading2']))
     training_data = [training_data_df.columns.tolist()] + training_data_df.values.tolist()
     training_table = Table(training_data)
@@ -69,9 +69,9 @@ def generate_pdf_with_visualizations(schedule_df, training_data_df, test_score_d
 
     #Prepare Test Score by Team
     #ISSUE IS HERE 
-    test_score_df.drop(test_score_df.columns.difference(['Emp_ID','Emp_Name','Team_ID','Avg_Score'], 1), inplace=True)
+    employee_test_df = test_score_df[['Emp_Name','Team_ID','Avg_Score']]
     elements.append(Paragraph("Test Scores", styles['Heading2']))
-    test_score_data = [test_score_df.columns.tolist()] + test_score_df.values.tolist()
+    test_score_data = [employee_test_df.columns.tolist()] + employee_test_df.values.tolist()
     test_score_table = Table(test_score_data)
     test_score_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),
@@ -92,6 +92,9 @@ def generate_pdf_with_visualizations(schedule_df, training_data_df, test_score_d
     elements.append(Spacer(1, 40))
 
     elements.append(Image(r"static\visualizations\feedback_of_trainees.png", width=500, height=300))
+    elements.append(Spacer(1, 40))
+
+    elements.append(Image(r"static\visualizations\avg_test_scores_by_module.png", width=500, height=300))
     elements.append(Spacer(1, 40))
 
     # Build PDF
