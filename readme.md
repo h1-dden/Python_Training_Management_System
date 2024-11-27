@@ -1,20 +1,22 @@
-Python Training Management System
-
-1.Run database_creation.txt in utils/database_scripts in MySQL to replicate the database.
-2.Run insertintosql.py to fill database with static values.
-3.In the terminal run command --> requirements.txt ,to install dependencies
-3.In the terminal run command --> streamlit run app.py ,to start the application.
-
 # Yash Talent Management Tool
 
-Welcome to the Python Training Management System! This project is designed to help manage training programs, track participants, and handle various training-related operations efficiently.
+## Overview
+
+The Yash Talent Management Tool is an application developed to manage and display insights of Yash’s training for different employees. The system allows users to upload CSV files, visualize data through bar graphs and other visualizations, and apply various filters to dynamically change the displayed data.
 
 ## Features
 
-- Create and manage training programs
-- Register participants for training sessions
-- Store and retrieve training data using a MySQL database
-- User-friendly interface powered by Streamlit
+Data Retrieval: Users can upload CSV files to the application.
+Data Visualization: The system displays bar graphs and other visualizations based on the uploaded data.
+Dynamic Filtering: Users can apply various filters to dynamically change the displayed data.
+Download TPR: Users can download Training Progress Report for an overall view
+
+## Technical Details
+
+Programming Language: Python
+Libraries: Streamlit, Pandas, Pyplot, Matplotlib, Pymysql
+Data Structure: Structured DataFrames
+Database: MySQL
 
 ## Getting Started
 
@@ -29,29 +31,24 @@ To get started with the Python Training Management System, follow the instructio
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
-   cd <repository-directory>
-Set up the database:
+   git clone https://github.com/h1-dden/Python_Training_Management_System
+   cd Python_Training_Management_System
 
-Run database_creation.txt found in the utils/database_scripts directory in your MySQL environment to create the necessary database structure.
-Insert static values:
+2. **Install Dependencies:**
+   ```bash
+   Create a virtual environment and activate it.
+   Install the required dependencies by running the requirements.txt file.
 
-Execute the insertintosql.py script to populate the database with initial data.
-Install dependencies:
+3. **Set up the database:**
+   ```bash
+   Run database_creation.txt found in the utils/database_scripts directory in your MySQL environment to create the necessary database structure.
+   Execute the insertintosql.py script to populate the database with initial data.
 
-In your terminal, run the following command to install the required Python packages:
-bash
-Insert Code
-Edit
-Copy code
-pip install -r requirements.txt
-Run the application:
+4. **Set up the database:**
+   ```bash
+   Run database_creation.txt found in the utils/database_scripts directory in your MySQL environment to create the necessary database structure.
+   Execute the insertintosql.py script to populate the database with initial data.
 
-Start the application using Streamlit by running:
-bash
-Insert Code
-Edit
-Copy code
-streamlit run app.py
-Usage
-Once the application is running, you can access it in your web browser. Follow the on-screen instructions to navigate through the various features of the training management system.
+4. **Running:**
+   ```bash
+   Execute streamlit run app.py in console

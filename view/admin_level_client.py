@@ -10,8 +10,8 @@ def show_admin_client(data_path):
 
     """ Show admin client page with template creation and file upload functionality"""
 
+    st.sidebar.markdown(" ")
     st.sidebar.header("Admin Menu")
-    st.sidebar.header(" ")
     st.sidebar.subheader("Data Management")
 
     template_dir = "templates"

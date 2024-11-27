@@ -10,7 +10,7 @@ from view import (home_plots,login,sidebar,
 image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 
                           "static/images/yash_logo.png")
 
-st.set_page_config(page_title="YTMS", page_icon=image_path, 
+st.set_page_config(page_title="YTMT", page_icon=image_path, 
                        layout="wide", initial_sidebar_state="collapsed"
                        )
 
