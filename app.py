@@ -15,7 +15,7 @@ st.set_page_config(page_title="YTMS", page_icon=image_path,
                        )
 
 st.image(image=image_path, width=135)
-st.title("YTMS - Python Team")
+st.title("Yash Talent Management Tool")
 
 # Initialize session state for login, role, and page
 if 'logged_in' not in st.session_state:
