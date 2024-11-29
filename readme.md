@@ -31,8 +31,8 @@ To get started with the Python Training Management System, follow the instructio
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/h1-dden/Yash_Talent_Management_Tool
-   cd Yash_Talent_Management_Tool
+   git clone https://github.com/h1-dden/Yash_Resource_Management_Tool
+   cd Yash_Resource_Management_Tool
 
 2. **Install Dependencies:**
    ```bash
