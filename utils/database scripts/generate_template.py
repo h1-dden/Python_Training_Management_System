@@ -1,7 +1,5 @@
 import pandas as pd
 
-import pandas as pd
-
 def create_template_file(filename):
   """
   Creates a template CSV file with only the header row from the original file.
@@ -22,6 +20,6 @@ def create_template_file(filename):
   header_row.to_csv(template_filename, index=False)
 
 # Example usage:
-filename = 'training_schedule_data.csv'
+filename = r"training_schedule_data.csv"
 #change filename for training_data and hiring_data
 create_template_file(filename)
