@@ -1,8 +1,8 @@
-# Yash Talent Management Tool
+# Yash Resource Management Tool
 
 ## Overview
 
-The Yash Talent Management Tool is an application developed to manage and display insights of Yash’s training for different employees. The system allows users to upload CSV files, visualize data through bar graphs and other visualizations, and apply various filters to dynamically change the displayed data.
+The Yash Resource Management Tool is an application developed to manage and display insights of Yash’s training for different employees. The system allows users to upload CSV files, visualize data through bar graphs and other visualizations, and apply various filters to dynamically change the displayed data.
 
 ## Features
 
